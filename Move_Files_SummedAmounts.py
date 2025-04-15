@@ -16,14 +16,16 @@ files = glob.glob(os.path.join(source_file_path,'marriage*.xlsx' ), recursive=Tr
 for f in files:
     try:
         df = pd.read_excel(f)
+        print(f)
     except IOError as error:
         print(error)
 
     summed_df = df.groupby(['Year'])['Total'].sum()   #sum the totals column by year"
-    print(summed_df)
+
+    substring = f[45:65]
 
     date_time= datetime.now()
-    datetime_file_name = f"NewMarriageFile_{str(date_time.month)}-{str(date_time.day)}-{str(date_time.hour)}-{str(date_time.minute)}-{str(date_time.second)}-{str(date_time.microsecond)}.xlsx"
+    datetime_file_name = f"New_{str(substring)}_{str(date_time.month)}-{str(date_time.day)}-{str(date_time.hour)}-{str(date_time.minute)}-{str(date_time.second)}-{str(date_time.microsecond)}.xlsx"
 
     new_file_path_loc = f"{source_file_path}/{datetime_file_name}"
     try:
